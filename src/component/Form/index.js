@@ -7,21 +7,20 @@ import {
   View,
 } from 'react-native'
 
+import {
+  map,
+} from 'lodash'
+
 import PropTypes from 'prop-types'
 
 import Field from '../Field'
 
 import styles from './style'
 
-import {
-  FIELD_KEYS,
-  FIELD_LABEL,
-} from '../../constants'
 
 export default class Form extends Componet {
   static propTypes = {
     key: PropTypes.string.isRequired, // Unique key to identifies the form
-    label: PropTypes.string.isRequired,
     onTextChanged: PropTypes.func.isRequired,
     formValue: PropTypes.object.isRequired, // The value each field in form
   }
@@ -41,70 +40,48 @@ export default class Form extends Componet {
     return formValue[[key]]
   }
 
+  renderField = form => {
+    const field =  map(form, ({ data }) => {
+      const {
+        key,
+        label,
+        value,
+      } = data
+      retrun (
+        <Field
+          key={key}
+          label={label}
+          onTextChanged={this.onUpdateText}
+          inputText={value}
+        />
+      )
+    })
+
+    return field
+  }
+
   render() {
     const {
       container,
       bodyContainer,
     } = styles
     const {
-      label,
+      key,
+      formValue,
     } = this.props
-    const {
-      FIELD_NAME,
-      FIELD_EMAIL,
-      FIELD_CONTACT,
-      FIELD_WEBSITE,
-      FIELD_DOB,
-    } = FIELD_KEYS
-    const {
-      LABEL_NAME,
-      LABEL_EMAIL,
-      LABEL_CONTACT,
-      LABEL_WEBSITE,
-      LABEL_DOB,
-    } = FIELD_LABEL
     return (
       <View
         style={container}
       >
         <Text>
           {
-            label
+            `Form ${key}`
           }
         </Text>
         <View
           style={bodyContainer}
         >
-          <Field
-            key={FIELD_NAME}
-            label={LABEL_NAME}
-            onTextChanged={this.onUpdateText}
-            inputText={this.extractFieldValue(FIELD_NAME)}
-          />
-          <Field
-            key={FIELD_EMAIL}
-            label={LABEL_EMAIL}
-            onTextChanged={this.onUpdateText}
-            inputText={this.extractFieldValue(FIELD_EMAIL)}
-          />
-          <Field
-            key={FIELD_CONTACT}
-            label={LABEL_CONTACT}
-            onTextChanged={this.onUpdateText}
-            inputText={this.extractFieldValue(FIELD_CONTACT)}
-          />
-          <Field
-            key={FIELD_WEBSITE}
-            label={LABEL_WEBSITE}
-            onTextChanged={this.onUpdateText}
-            inputText={this.extractFieldValue(FIELD_WEBSITE)}
-          />
-          <Field
-            key={FIELD_DOB}
-            label={LABEL_DOB}
-            onTextChanged={this.onUpdateText}
-            inputText={this.extractFieldValue(FIELD_DOB)}
-          />
+          {this.renderField(formValue)}
         </View>
       </View>
     )

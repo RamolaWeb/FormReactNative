@@ -1,5 +1,5 @@
-import Field from './Field'
+import FormHolder from './FormHolder'
 
 export {
-  Field,
+  FormHolder,
 }
