@@ -1,5 +1,5 @@
 import React, {
-  Componet,
+  Component,
 } from 'react'
 
 import {
@@ -18,38 +18,31 @@ import Field from '../Field'
 import styles from './style'
 
 
-export default class Form extends Componet {
+export default class Form extends Component {
   static propTypes = {
-    key: PropTypes.string.isRequired, // Unique key to identifies the form
+    id: PropTypes.number.isRequired, // Unique key to identifies the form
     onTextChanged: PropTypes.func.isRequired,
-    formValue: PropTypes.object.isRequired, // The value each field in form
+    formValue: PropTypes.array.isRequired, // The value each field in form
   }
 
   onUpdateText = (fieldKey, value) => {
     const {
-      key,
+      id,
       onTextChanged,
     } = this.props
-    onTextChanged(key, fieldKey, value)
-  }
-
-  extractFieldValue = key => {
-    const {
-      formValue,
-    } = this.props
-    return formValue[[key]]
+    onTextChanged(id, fieldKey, value)
   }
 
   renderField = form => {
-    const field =  map(form, ({ data }) => {
+    const field =  map(form, ( data) => {
       const {
-        key,
+        id,
         label,
         value,
       } = data
-      retrun (
+      return (
         <Field
-          key={key}
+          id={id}
           label={label}
           onTextChanged={this.onUpdateText}
           inputText={value}
@@ -66,16 +59,21 @@ export default class Form extends Componet {
       bodyContainer,
     } = styles
     const {
-      key,
+      id,
       formValue,
     } = this.props
     return (
       <View
         style={container}
       >
-        <Text>
+        <Text
+          style={{
+            padding: 10,
+            fontSize: 15,
+          }}
+        >
           {
-            `Form ${key}`
+            `Form ${id}`
           }
         </Text>
         <View

@@ -1,6 +1,7 @@
 import {
   FIELD_KEYS,
   FIELD_LABEL,
+  FIELD_VALIDTOR,
 } from '../../constants'
 
 const {
@@ -19,30 +20,42 @@ const {
   LABEL_DOB,
 } = FIELD_LABEL
 
+const {
+  REGEX_NAME,
+  REGEX_EMAIL,
+  REGEX_CONTACT,
+  REGEX_WEBSITE,
+} = FIELD_VALIDTOR
+
 export const FIELD_DATA = [
   {
-    key: FIELD_NAME,
+    id: FIELD_NAME,
     label: LABEL_NAME,
     value: '',
+    validator: REGEX_NAME,
   },
   {
-    key: FIELD_EMAIL,
+    id: FIELD_EMAIL,
     label: LABEL_EMAIL,
     value: '',
+    validator: REGEX_EMAIL,
   },
   {
-    key: FIELD_CONTACT,
+    id: FIELD_CONTACT,
     label: LABEL_CONTACT,
     value: '',
+    validator: REGEX_CONTACT,
   },
   {
-    key: FIELD_WEBSITE,
+    id: FIELD_WEBSITE,
     label: LABEL_WEBSITE,
     value: '',
+    validator: REGEX_WEBSITE,
   },
   {
-    key: FIELD_DOB,
+    id: FIELD_DOB,
     label: LABEL_DOB,
     value: '',
+    validator: '',
   },
 ]

@@ -9,7 +9,8 @@ const styles = StyleSheet.create({
   bodyContainer: {
     borderWidth: 1,
     borderColor: 'black',
-    padding: 10,
+    margin: 5,
+    padding: 5,
   },
 })
 

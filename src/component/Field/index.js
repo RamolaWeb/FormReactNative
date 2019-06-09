@@ -20,7 +20,7 @@ import {
 // This is the component which is used to display the field in forms
 export default class Field extends Component {
   static propTypes = {
-    key: PropTypes.string.isRequired, // This is the key to uniquely identifies the field
+    id: PropTypes.string.isRequired, // This is the key to uniquely identifies the field
     label: PropTypes.string.isRequired, // This is the placeholder text which will be seen in the label
     inputText: PropTypes.string.isRequired, // This is the value in the input 
     onTextChanged: PropTypes.func.isRequired, // This function invoke every time the text changed
@@ -28,7 +28,7 @@ export default class Field extends Component {
 
   render() {
     const {
-      key,
+      id,
       label,
       inputText,
       onTextChanged,
@@ -41,6 +41,7 @@ export default class Field extends Component {
       inputStyle,
     } = styles
 
+    const showLogo = inputText.trim().length <= 0
     return (
       <View
         style={container}
@@ -53,17 +54,19 @@ export default class Field extends Component {
 
         <TextInput
           style={inputStyle}
-          onChangeText={text => onTextChanged(key, text)}
+          onChangeText={text => onTextChanged(id, text)}
           underlineColorAndroid="transparent"
           value={inputText}
         />
 
-        <Image
-          source={REQUIRED_ICON}
-          resizeMode="contain"
-          style={imageStyle}
-        />
-
+        {showLogo && (
+          <Image
+            source={REQUIRED_ICON}
+            resizeMode="contain"
+            style={imageStyle}
+          />
+        )
+        }
       </View>
     )
   }

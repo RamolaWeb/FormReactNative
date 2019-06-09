@@ -11,15 +11,17 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   imageStyle: {
-    flex: 2,
+    flex: 0,
     width: 25,
     height: 25,
   },
   inputStyle: {
     flex: 1,
+    paddingBottom: 5,
   },
   labelStyle: {
-    flex: 1,
+    marginRight: 5,
+    paddingTop: 12,
   },
 })
 

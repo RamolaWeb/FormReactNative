@@ -16,6 +16,7 @@ import {
 
 import {
 	deepClone,
+	validateForm,
 } from '../../utils'
 
 export default class FormContainer extends Component {
@@ -25,7 +26,7 @@ export default class FormContainer extends Component {
       count: 1,
       formData: [
         {
-          key: 1,
+          id: 1,
           data: deepClone(FIELD_DATA),
         },
       ],
@@ -40,7 +41,7 @@ export default class FormContainer extends Component {
 
 		const updatedCount = count + 1
 		const newFormData = {
-			key: updatedCount,
+			id: updatedCount,
 			data: deepClone(FIELD_DATA),
 		}
 
@@ -60,14 +61,14 @@ export default class FormContainer extends Component {
 			formData
 		} = this.state
 		const formIndex = findIndex(formData, {
-			key: formKey,
+			id: formKey,
 		})
 
 		const {
 			data,
 		} = formData[formIndex]
 		const fieldIndex = findIndex(data, {
-			key: fieldKey,
+			id: fieldKey,
 		})
 
 		const updatedFieldData = {
@@ -96,6 +97,17 @@ export default class FormContainer extends Component {
 			formData: updatedFormData
 		})
 	}
+
+	onSubmitClickListener = () => {
+		const {
+			formData,
+		} = this.state
+		
+		console.log(formData)
+
+		const isValid = validateForm(formData)
+
+	}
 	
 	render() {
 		const {
@@ -105,6 +117,7 @@ export default class FormContainer extends Component {
 			<FormHolder
 				formData={formData}
 				onAddForm={this.onAddMoreClickListener}
+				onSubmit={() => this.onSubmitClickListener()}
 				onUpdateText={this.onUpdateText}
 			/>
 		)

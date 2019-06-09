@@ -7,9 +7,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerStyle: {
-    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-evenly'
+    justifyContent: 'space-between',
+  },
+  submitButton: {
+    position: 'absolute',
+    bottom:  0,
+    left: '40%',
   },
 })
 
